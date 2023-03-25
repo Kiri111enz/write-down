@@ -1,6 +1,12 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import styles from './../styles/App.module.css';
+import SignUp from './SignUp';
+
 const App = (): JSX.Element => {
     return (
-        <h1>Write down</h1>
+        <div className={styles['absolute-centered']}>
+            <SignUp/>
+        </div>
     );
 };
 
