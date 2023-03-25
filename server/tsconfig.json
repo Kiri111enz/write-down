@@ -5,6 +5,8 @@
         "esModuleInterop": true,
         "baseUrl": "src",
         "noImplicitAny": true,
-        "noImplicitReturns": true
+        "noImplicitReturns": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
     }
 }

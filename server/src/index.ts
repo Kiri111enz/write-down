@@ -3,7 +3,7 @@ dotenv.config();
 
 import path from 'path';
 import express from 'express';
-import sequelize from './db';
+import sequelize from './db/dbSetup';
 
 const app = express();
 app.use(express.json());
