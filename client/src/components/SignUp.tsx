@@ -1,8 +1,9 @@
 import { SyntheticEvent } from 'react';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import InputAdornment from '@mui/material/InputAdornment';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 import axios from 'axios';
-import styles from './../styles/SignUp.module.css';
 import FormInput from './FormInput';
 
 const submit = async (event: SyntheticEvent): Promise<void> => {
@@ -19,14 +20,28 @@ const submit = async (event: SyntheticEvent): Promise<void> => {
 };
 
 const SignUp = (): JSX.Element => (
-    <Form className={styles.form} onSubmit={submit}>
+    <Stack className="z-index-1 p-2 bg-white rounded text-center"
+        component="form" onSubmit={submit}
+        spacing={1.3}
+        noValidate>
         <h2>Sign Up</h2>
-        <FormInput type="text" name="name"  placeholder="Username" description="@"></FormInput>
-        <FormInput type="email" name="email"  placeholder="Email"></FormInput>
-        <FormInput type="password" name="password" placeholder="Password"></FormInput>
-        <FormInput type="password" placeholder="Repeat password"></FormInput>
-        <Button variant="primary" type="submit">Submit</Button>
-    </Form>  
+        <FormInput type="text" name="name" 
+            label="Username" size="small" 
+            InputProps={{
+                endAdornment: (
+                    <InputAdornment position="end">
+                        <AccountCircle />
+                    </InputAdornment>
+                )
+            }}></FormInput>
+        <FormInput type="email" name="email" 
+            label="Email" size="small"></FormInput>
+        <FormInput type="password" name="password" 
+            label="Password" size="small"></FormInput>
+        <FormInput type="password" 
+            label="Repeat password" size="small"></FormInput>
+        <Button variant="contained" type="submit">Submit</Button>
+    </Stack>
 );
 
 export default SignUp;

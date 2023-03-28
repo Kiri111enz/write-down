@@ -1,10 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import styles from './../styles/App.module.css';
 import SignUp from './SignUp';
 
 const App = (): JSX.Element => {
     return (
-        <div className={styles['absolute-centered']}>
+        <div className="position-absolute top-50 start-50 translate-middle">
             <SignUp/>
         </div>
     );
