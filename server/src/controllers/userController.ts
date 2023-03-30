@@ -6,12 +6,17 @@ class UserController {
     public async create(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
         try {
             const { name, email, password } = req.body;
+            if (!password)
+                return res.status(500).send('User password cannot be empty.');
             const passwordHash = await bcrypt.hash(password, 5);
             const user = await User.create({ name, email, password: passwordHash });
             return res.json(user);
         }
         catch (err) {
-            next(err);
+            if (err.errors)
+                return res.status(500).send(err.errors[0].message);
+            else
+                next(err);
         }
     }
 }

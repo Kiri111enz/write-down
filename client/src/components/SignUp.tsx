@@ -29,7 +29,12 @@ const submit = async (event: SyntheticEvent): Promise<void> => {
             alert('Success!');
             console.log(data);
         })
-        .catch((err) => alert(err));
+        .catch((err) => {
+            if (err.response)
+                alert(err.response.data);
+            else
+                alert(err);
+        });
 };
 
 const SignUpForm = observer(({store}: {store: FormStore}): JSX.Element => (
