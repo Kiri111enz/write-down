@@ -5,7 +5,7 @@ import { FormStoreContext } from './Form';
 
 type FormInputProps = Omit<TextFieldProps, 'error' | 'helperText' | 'onChange'>;
 
-const FormInput = observer((props: FormInputProps): JSX.Element => {
+const FormInput: React.FC<FormInputProps> = observer((props) => {
     const formStore = useContext(FormStoreContext);
     return (
         // @ts-ignore

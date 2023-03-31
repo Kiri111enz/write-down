@@ -13,7 +13,7 @@ interface FormProps {
 
 const FormStoreContext = createContext(undefined);
 
-const Form = observer((props: PropsWithChildren<FormProps>): JSX.Element => (
+const Form: React.FC<PropsWithChildren<FormProps>> = observer((props) => (
     <Stack className="z-index-1 p-2 bg-white rounded text-center"
         component="form" {...props}
         spacing={1.3}

@@ -7,7 +7,7 @@ import { submit } from './utils/http';
 import FormInput from './FormInput';
 import Form from './Form';
 
-const SignUpForm = observer((): JSX.Element => {
+const SignUpForm: React.FC = observer(() => {
     const equals_password = (s: string): string => 
         !equals(s, store.fields.password.value) ? 'Wrong password.' : '';
 
