@@ -21,7 +21,8 @@
         "linebreak-style": [ "warn", "windows"],
         "quotes":          [ "warn", "single" ],
         "semi":            [ "warn", "always" ],
-        "no-unused-vars":  [ "warn", { "argsIgnorePattern": "^_" }],
+        "no-unused-vars":  [ "warn", { "args": "none" }],
+        "flatTernaryExpressions": true,
 
         "@typescript-eslint/ban-ts-comment": "off",
         "@typescript-eslint/explicit-function-return-type": [ "error", { "allowExpressions": true } ]
