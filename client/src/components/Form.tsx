@@ -1,7 +1,7 @@
 import { createContext, PropsWithChildren } from 'react';
 import { Stack, Button } from '@mui/material';
 import { observer } from 'mobx-react-lite';
-import { FormStore } from '../../stores/FormStore';
+import { FormStore } from '../stores/view/FormStore';
 
 interface FormProps {
     title: string;
@@ -11,7 +11,7 @@ interface FormProps {
     onSubmit: (event: React.FormEvent) => void;
 }
 
-const FormStoreContext = createContext(undefined);
+const FormStoreContext = createContext<FormStore>(undefined);
 
 const Form: React.FC<PropsWithChildren<FormProps>> = observer((props) => (
     <Stack className="z-index-1 p-2 bg-white rounded text-center"
