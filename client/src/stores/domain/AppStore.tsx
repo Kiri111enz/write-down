@@ -1,5 +1,5 @@
 import UserStore from './UserStore';
-import AuthService from './../../services/auth';
+import AuthService from 'services/auth';
 
 class AppStore {
     public userStore: UserStore;

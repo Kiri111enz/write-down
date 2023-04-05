@@ -1,10 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { createContext } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import AppStore from './stores/domain/AppStore';
-import RequireAuth from './components/RequireAuth';
-import Main from './pages/Main';
-import SignIn from './pages/SignIn';
+import AppStore from 'stores/domain/AppStore';
+import RequireAuth from 'components/RequireAuth';
+import Main from 'pages/Main';
+import SignIn from 'pages/SignIn';
 
 const AppStoreContext = createContext<AppStore>(undefined);
 

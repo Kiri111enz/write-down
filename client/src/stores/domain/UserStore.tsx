@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 import AppStore from './AppStore';
-import AuthService, { LogInRequestData } from './../../services/auth';
-import { Response } from './../../utils/http';
+import AuthService, { LogInRequestData } from 'services/auth';
+import { Response } from 'utils/http';
 
 class UserStore {
     private _isAuthorized = false;

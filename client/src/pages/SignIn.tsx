@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { InputAdornment } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { observer, useLocalObservable } from 'mobx-react-lite';
-import { FormStore } from '../stores/view/FormStore';
-import { required } from '../utils/validator';
-import FormInput from '../components/FormInput';
-import Form from '../components/Form';
-import { AppStoreContext } from './../App';
-import { LogInRequestData } from './../services/auth';
+import { FormStore } from 'stores/view/FormStore';
+import { required } from 'utils/validator';
+import FormInput from 'components/FormInput';
+import Form from 'components/Form';
+import { AppStoreContext } from 'App';
+import { LogInRequestData } from 'services/auth';
 
 const SignIn: React.FC = observer(() => {
     const navigate = useNavigate();

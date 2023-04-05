@@ -1,4 +1,4 @@
-import { post, Response } from './../utils/http';
+import { post, Response } from 'utils/http';
 
 interface LogInRequestData {
     name: string,
