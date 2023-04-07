@@ -12,6 +12,7 @@ app.use(express.json());
 app.use(express.static(path.resolve(__dirname, '..', '..', 'public')));
 app.use(cors());
 app.use('/', router);
+app.use('*', (req, res) => res.sendFile(path.resolve(__dirname, '..', '..', 'public', 'index.html')));
 
 const launchServer = async(): Promise<void> => {
     try {
