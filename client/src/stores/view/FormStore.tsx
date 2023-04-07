@@ -1,4 +1,5 @@
-import { makeAutoObservable } from 'mobx';
+import { runInAction, makeAutoObservable } from 'mobx';
+import { Response } from 'utils/http';
 
 type Rule = (s: string) => string
 
@@ -36,17 +37,22 @@ class FormField {
 }
 
 class FormStore {
-    public alertText = '';
     private _fields: Record<string, FormField> = { };
+    private _alertText = '';
 
-    constructor(rulesById: Record<string, Rule[]>) {
+    constructor(
+        rulesById: Record<string, Rule[]>,
+        private _submitFunc: (data: object) => Promise<Response>) {
         for (const [id, rules] of Object.entries(rulesById))
             this._fields[id] = new FormField(rules);
         
         makeAutoObservable(this);
+        this.submit = this.submit.bind(this);
     }
 
     public get fields(): Record<string, FormField> { return this._fields; }
+
+    public get alertText(): string { return this._alertText; }
 
     public get allValid(): boolean {
         for (const [, field] of Object.entries(this._fields))
@@ -57,6 +63,15 @@ class FormStore {
 
     public onFieldChange = (id: string, value: string): void =>
         this._fields[id].update(value);
+
+    public async submit(data: object): Promise<void> {
+        const res = await this._submitFunc(data);
+        runInAction(() => this._alertText = res.success ? '' : res.message);
+    }
+
+    public resetAlertText(): void {
+        this._alertText = '';
+    }
 }
 
 export { FormStore, FormField, Rule as FormFieldRule };
