@@ -1,6 +1,6 @@
 import { runInAction, makeAutoObservable } from 'mobx';
 import AppStore from './AppStore';
-import AuthService, { LogInRequestData } from 'services/auth';
+import AuthService, { SignInRequestData, SignUpRequestData } from 'services/auth';
 import { Response } from 'utils/http';
 
 class UserStore {
@@ -12,11 +12,21 @@ class UserStore {
         private _appStore: AppStore, 
         private _authService: AuthService) {
         makeAutoObservable(this);
-        this.logIn = this.logIn.bind(this);
+        this.signIn = this.signIn.bind(this);
+        this.signUp = this.signUp.bind(this);
+        this._auth = this._auth.bind(this);
     }
 
-    public async logIn(data: LogInRequestData): Promise<Response> {
-        const res = await this._authService.logIn(data);
+    public async signIn(data: SignInRequestData): Promise<Response> {
+        return await this._auth(this._authService.signIn, data);
+    }
+
+    public async signUp(data: SignUpRequestData): Promise<Response> {
+        return await this._auth(this._authService.signUp, data);
+    }
+
+    private async _auth(authFunc: (data: object) => Promise<Response>, data: object): Promise<Response> {
+        const res = await authFunc(data);
         runInAction(() => this._isAuthorized = res.success);
         return res;
     }
