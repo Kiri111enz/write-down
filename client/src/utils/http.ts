@@ -3,15 +3,15 @@ import axios from 'axios';
 class Response {
     constructor(
         private _success: boolean,
-        private _data: object
+        private _message: string
     ) { }
 
     public get success(): boolean {
         return this._success;
     }
 
-    public get data(): object {
-        return this._data;
+    public get message(): string {
+        return this._message;
     }
 }
 

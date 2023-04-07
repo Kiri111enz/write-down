@@ -36,6 +36,7 @@ class FormField {
 }
 
 class FormStore {
+    public alertText = '';
     private _fields: Record<string, FormField> = { };
 
     constructor(rulesById: Record<string, Rule[]>) {

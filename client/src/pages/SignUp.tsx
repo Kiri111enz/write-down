@@ -21,7 +21,7 @@ const SignUpForm: React.FC = observer(() => {
     ));
 
     return (
-        <Form title="Sign Up" store={store} method="POST" action="user/sign-up" onSubmit={submit}>
+        <Form title="Sign Up" store={store} method="POST" action="user/sign-up" submit={submit}>
             <FormInput id="name" type="text" name="name" label="Username"
                 InputProps={{
                     endAdornment: (

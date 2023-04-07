@@ -6,7 +6,7 @@ const RequireAuth: React.FC<PropsWithChildren> = (props) => {
     const userStore = useContext(AppStoreContext).userStore;
     
     if (userStore.isAuthorized)
-        return props.children;
+        return <>{props.children}</>;
     else 
         return <Navigate to="/sign-in" />;
 };
