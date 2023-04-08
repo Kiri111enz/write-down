@@ -8,7 +8,7 @@ const RequireAuth: React.FC<PropsWithChildren> = (props) => {
     if (userStore.isAuthorized)
         return <>{props.children}</>;
     else 
-        return <Navigate to="/sign-up" />;
+        return <Navigate to="/sign-in" />;
 };
 
 export default RequireAuth;

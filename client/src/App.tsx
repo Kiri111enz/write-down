@@ -5,6 +5,7 @@ import AppStore from 'stores/domain/AppStore';
 import RequireAuth from 'components/RequireAuth';
 import Main from 'pages/Main';
 import SignUp from 'pages/SignUp';
+import SignIn from 'pages/SignIn';
 
 const AppStoreContext = createContext<AppStore>(undefined);
 
@@ -13,7 +14,8 @@ const App: React.FC = () => {
 
     const router = createBrowserRouter([
         { path: '/', element: <RequireAuth><Main /></RequireAuth> },
-        { path: '/sign-up', element: <SignUp returnPath='/'/>}
+        { path: '/sign-in', element: <SignIn returnPath='/' />},
+        { path: '/sign-up', element: <SignUp returnPath='/' />},
     ]);
     
     return (

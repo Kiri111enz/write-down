@@ -19,7 +19,7 @@ const FormPage: React.FC<PropsWithChildren<FormPageProps>> = observer((props) =>
 
     return (
         <>
-            <div className="position-absolute top-50 start-50 translate-middle border border-dark rounded">
+            <div className="position-absolute top-50 start-50 translate-middle text-center border border-dark rounded">
                 {props.children}
             </div>
             {userStore.isAuthorized && <Navigate to={props.returnPath} replace={true} />}
