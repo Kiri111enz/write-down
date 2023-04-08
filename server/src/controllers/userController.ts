@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcrypt';
-import { User } from './../db/models';
+import { User } from 'db/models';
 
 class UserController {
     public async create(req: Request, res: Response, next: NextFunction): Promise<Response | void> {

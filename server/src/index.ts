@@ -4,8 +4,8 @@ dotenv.config();
 import path from 'path';
 import express from 'express';
 import cors from 'cors';
-import sequelize from './db/dbSetup';
-import router from './routers/indexRouter';
+import sequelize from 'db/dbSetup';
+import router from 'routers/indexRouter';
 
 const app = express();
 app.use(express.json());
