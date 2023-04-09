@@ -15,14 +15,25 @@ class UserStore {
         this.signIn = this.signIn.bind(this);
         this.signUp = this.signUp.bind(this);
         this._auth = this._auth.bind(this);
+        this.auth();
+    }
+
+    public async signUp(data: SignUpRequestData): Promise<Response> {
+        return await this._auth(this._authService.signUp, data);
     }
 
     public async signIn(data: SignInRequestData): Promise<Response> {
         return await this._auth(this._authService.signIn, data);
     }
 
-    public async signUp(data: SignUpRequestData): Promise<Response> {
-        return await this._auth(this._authService.signUp, data);
+    public async signOut(): Promise<Response> {
+        const res = await this._authService.singOut();
+        runInAction(() => this._isAuthorized = !res.success);
+        return res;
+    }
+
+    public async auth(): Promise<Response> {
+        return await this._auth(this._authService.auth, {});
     }
 
     private async _auth(authFunc: (data: object) => Promise<Response>, data: object): Promise<Response> {

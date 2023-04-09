@@ -18,7 +18,8 @@ class Response {
 const post = async(data: object, url: string): Promise<Response> => {
     try {
         const res = await axios.post(url, data, {
-            headers: { 'Content-Type': 'application/json ' }
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true
         });
         return new Response(true, res.data);
     }

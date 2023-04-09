@@ -8,6 +8,10 @@
     "noImplicitReturns": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "typeRoots": [
+      "./src/@types",
+      "./node_modules/@types"
+    ],
   },
   "ts-node": {
     "require": ["tsconfig-paths/register"]

@@ -10,12 +10,20 @@ interface SignUpRequestData extends SignInRequestData {
 }
 
 class AuthService {
+    public async signUp(data: SignUpRequestData): Promise<Response> {
+        return await post(data, 'user/sign-up');
+    }
+    
     public async signIn(data: SignInRequestData): Promise<Response> {
         return await post(data, 'user/sign-in');
     }
 
-    public async signUp(data: SignUpRequestData): Promise<Response> {
-        return await post(data, 'user/sign-up');
+    public async singOut(): Promise<Response> {
+        return await post({}, 'user/sign-out');
+    }
+
+    public async auth(): Promise<Response> {
+        return await post({}, 'user/auth');
     }
 }
 
