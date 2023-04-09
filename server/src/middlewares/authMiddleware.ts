@@ -1,8 +1,8 @@
-import { User } from 'db/models';
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import { User } from 'db/models';
 
-export default async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+const auth = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
     if (req.method == 'OPTIONS')
         return next();
 
@@ -18,3 +18,5 @@ export default async (req: Request, res: Response, next: NextFunction): Promise<
         return res.status(401).send('User not authorized.')
     }
 }
+
+export default auth;

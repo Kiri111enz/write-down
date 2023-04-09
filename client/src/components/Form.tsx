@@ -17,7 +17,7 @@ const submit = async (event: React.FormEvent, onSubmit: (data: FormData) => Prom
 
 const FormStoreContext = createContext<FormStore>(undefined);
 
-const Form: React.FC<PropsWithChildren<FormProps>> = observer((props) => (
+const Form: React.FC<PropsWithChildren<FormProps>> = observer(props => (
     <Stack className="z-index-1 p-2 bg-white rounded text-center"
         component="form" onSubmit={async event => await submit(event, props.store.submit)} {...props}
         spacing={1.3}

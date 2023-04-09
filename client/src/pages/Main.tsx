@@ -3,7 +3,7 @@ import { Button } from '@mui/material';
 import { AppStoreContext } from 'App';
 
 const Main: React.FC = () => {
-    const userStore = useContext(AppStoreContext).userStore;
+    const userStore = useContext(AppStoreContext).authStore;
 
     const logOut = async (): Promise<void> => {
         await userStore.signOut();  

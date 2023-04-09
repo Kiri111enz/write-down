@@ -2,14 +2,14 @@ import { useContext, PropsWithChildren } from 'react';
 import { Navigate } from 'react-router-dom';
 import { AppStoreContext } from 'App';
 import { observer, useLocalObservable } from 'mobx-react-lite';
-import UserStore from 'stores/domain/UserStore';
+import AuthStore from 'stores/domain/AuthStore';
 
-const RequireAuth: React.FC<PropsWithChildren> = observer((props) => {
+const RequireAuth: React.FC<PropsWithChildren> = observer(props => {
     const appStore = useContext(AppStoreContext);
-    const userStore = useLocalObservable((): UserStore => appStore.userStore);
+    const authStore = useLocalObservable<AuthStore>(() => appStore.authStore);
     
     return (
-        userStore.isAuthorized ? <>{props.children}</> : <Navigate to="/sign-in" />
+        authStore.isAuthorized ? <>{props.children}</> : <Navigate to="/sign-in" />
     );
 });
 

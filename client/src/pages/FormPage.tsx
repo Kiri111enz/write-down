@@ -10,8 +10,8 @@ interface FormPageProps {
     returnPath: string
 }
 
-const FormPage: React.FC<PropsWithChildren<FormPageProps>> = observer((props) => {
-    const userStore = useContext(AppStoreContext).userStore;
+const FormPage: React.FC<PropsWithChildren<FormPageProps>> = observer(props => {
+    const authStore = useContext(AppStoreContext).authStore;
 
     const hideSnackbar = (): void => {
         props.formStore.resetAlertText();
@@ -22,7 +22,7 @@ const FormPage: React.FC<PropsWithChildren<FormPageProps>> = observer((props) =>
             <div className="position-absolute top-50 start-50 translate-middle text-center border border-dark rounded">
                 {props.children}
             </div>
-            {userStore.isAuthorized && <Navigate to={props.returnPath} replace={true} />}
+            {authStore.isAuthorized && <Navigate to={props.returnPath} replace={true} />}
             <Snackbar open={!!props.formStore.alertText} autoHideDuration={5000} onClose={hideSnackbar}
                 anchorOrigin={{vertical: 'top', horizontal: 'center'}}>
                 <Alert severity="error">{props.formStore.alertText}</Alert>

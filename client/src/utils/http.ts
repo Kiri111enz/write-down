@@ -15,7 +15,7 @@ class Response {
     }
 }
 
-const post = async(data: object, url: string): Promise<Response> => {
+const post = async(url: string, data: object): Promise<Response> => {
     try {
         const res = await axios.post(url, data, {
             headers: { 'Content-Type': 'application/json' },

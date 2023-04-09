@@ -1,11 +1,10 @@
-import UserStore from './UserStore';
-import AuthService from 'services/auth';
+import AuthStore from './AuthStore';
 
 class AppStore {
-    public userStore: UserStore;
+    public authStore: AuthStore;
 
     constructor() {
-        this.userStore = new UserStore(this, new AuthService());
+        this.authStore = new AuthStore();
     }
 }
 

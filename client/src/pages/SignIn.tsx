@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Link, InputAdornment } from '@mui/material';
+import { InputAdornment } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { observer, useLocalObservable } from 'mobx-react-lite';
 import { FormStore } from 'stores/view/FormStore';
@@ -7,15 +7,16 @@ import { required } from 'utils/validator';
 import FormInput from 'components/FormInput';
 import Form from 'components/Form';
 import FormPage from './FormPage';
+import LinkWithDescription from 'components/LinkWithDescription';
 import { AppStoreContext } from 'App';
 
-const SignIn: React.FC<{ returnPath: string }> = observer((props) => {
-    const userStore = useContext(AppStoreContext).userStore;
-    const formStore = useLocalObservable((): FormStore => (
+const SignIn: React.FC<{ returnPath: string }> = observer(props => {
+    const authStore = useContext(AppStoreContext).authStore;
+    const formStore = useLocalObservable<FormStore>(() => (
         new FormStore({
             'name': [required],
             'password': [required],
-        }, userStore.signIn)
+        }, authStore.signIn)
     ));
 
     return (
@@ -33,10 +34,7 @@ const SignIn: React.FC<{ returnPath: string }> = observer((props) => {
                     <FormInput id="password" type="password" name="password" label="Password"></FormInput>
                 </Form>
             </FormPage>
-            <div className="text-muted fixed-bottom my-3">
-                <span>Dont't have an account yet? </span>
-                <Link href="/sign-up" variant="body2">Sign Up</Link>
-            </div>
+            <LinkWithDescription description="Dont't have an account yet? " href="/sign-up" label="Sign Up" />
         </div>
     );
 });

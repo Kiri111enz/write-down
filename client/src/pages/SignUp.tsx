@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Link, InputAdornment } from '@mui/material';
+import { InputAdornment } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { observer, useLocalObservable } from 'mobx-react-lite';
 import { FormStore } from 'stores/view/FormStore';
@@ -7,14 +7,15 @@ import { required, email, equals } from 'utils/validator';
 import FormInput from 'components/FormInput';
 import Form from 'components/Form';
 import FormPage from './FormPage';
+import LinkWithDescription from 'components/LinkWithDescription';
 import { AppStoreContext } from 'App';
 
-const SignUp: React.FC<{ returnPath: string }> = observer((props) => {
+const SignUp: React.FC<{ returnPath: string }> = observer(props => {
     const equals_password = (s: string): string => 
         !equals(s, formStore.fields.password.value) ? 'Wrong password.' : '';
 
-    const userStore = useContext(AppStoreContext).userStore;
-    const formStore = useLocalObservable((): FormStore => (
+    const userStore = useContext(AppStoreContext).authStore;
+    const formStore = useLocalObservable<FormStore>(() => (
         new FormStore({
             'name': [required],
             'email': [required, email],
@@ -40,10 +41,7 @@ const SignUp: React.FC<{ returnPath: string }> = observer((props) => {
                     <FormInput id="password-repeat" type="password" label="Repeat password"></FormInput>
                 </Form>
             </FormPage>
-            <div className="text-muted fixed-bottom my-3">
-                <span>Already have an account? </span>
-                <Link href="/sign-in" variant="body2">Sign In</Link>
-            </div>
+            <LinkWithDescription description="Already have an account? " href="/sign-in" label="Sign In" />
         </div>
     );
 });
