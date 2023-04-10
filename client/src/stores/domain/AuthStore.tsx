@@ -2,7 +2,7 @@ import { runInAction, makeAutoObservable } from 'mobx';
 import { post, Response } from 'utils/http';
 
 class AuthStore {
-    private readonly _baseUrl = 'user/';
+    private readonly _BASE_URL = 'user/';
     private _isAuthorized = false;
 
     constructor() {
@@ -34,7 +34,7 @@ class AuthStore {
     }
 
     private async _updateStatus(url: string, data: object, flip=false): Promise<Response> {
-        const res = await post(this._baseUrl + url, data);
+        const res = await post(this._BASE_URL + url, data);
         runInAction(() => this._isAuthorized = flip ? !res.success : res.success);
         return res;
     }

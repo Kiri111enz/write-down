@@ -61,8 +61,9 @@ class FormStore {
         return true;
     }
 
-    public onFieldChange = (id: string, value: string): void =>
+    public onFieldChange(id: string, value: string): void {
         this._fields[id].update(value);
+    }
 
     public async submit(data: object): Promise<void> {
         const res = await this._submitFunc(data);

@@ -1,7 +1,11 @@
 import { Response } from "express";
 
 class Cookie {
-    constructor(public name: string, public value: string) { }
+    constructor(private _name: string, private _value: string) { }
+
+    public get name(): string { return this._name; }
+
+    public get value(): string { return this._value; }
 }
 
 const sendWithCookie = (res: Response, cookie: Cookie, message: string): Response => {

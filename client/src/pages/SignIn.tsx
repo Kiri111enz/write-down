@@ -6,7 +6,7 @@ import { FormStore } from 'stores/view/FormStore';
 import { required } from 'utils/validator';
 import FormInput from 'components/FormInput';
 import Form from 'components/Form';
-import FormPage from './FormPage';
+import FormPage from '../components/FormPage';
 import LinkWithDescription from 'components/LinkWithDescription';
 import { AppStoreContext } from 'App';
 
