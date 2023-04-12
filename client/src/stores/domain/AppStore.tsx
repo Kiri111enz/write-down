@@ -1,11 +1,13 @@
 import AuthStore from './AuthStore';
 
 class AppStore {
-    public authStore: AuthStore;
+    private readonly _authStore: AuthStore;
 
     constructor() {
-        this.authStore = new AuthStore();
+        this._authStore = new AuthStore();
     }
+
+    public get authStore(): AuthStore { return this._authStore; }
 }
 
 export default AppStore;

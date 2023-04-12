@@ -6,12 +6,7 @@ class AuthStore {
     private _isAuthorized = false;
 
     constructor() {
-        this.signIn = this.signIn.bind(this);
-        this.signUp = this.signUp.bind(this);
-        this.auth = this.auth.bind(this);
-        this.signOut = this.signOut.bind(this);
-
-        makeAutoObservable(this);
+        makeAutoObservable(this, {}, { autoBind: true });
         this.auth();
     }
 

@@ -14,9 +14,9 @@ const FormInput: React.FC<FormInputProps> = observer(props => {
             size={props.size ? props.size : 'small'}
             error={!!formStore.fields[props.id].errorMsg}
             helperText={formStore.fields[props.id].errorMsg}
-            onChange={formStore ? ((event: ChangeEvent<HTMLInputElement>) => {
+            onChange={((event: ChangeEvent<HTMLInputElement>) => {
                 formStore.onFieldChange(event.currentTarget.id, event.currentTarget.value);
-            }) : undefined}>
+            })}>
         </TextField>
     );
 });

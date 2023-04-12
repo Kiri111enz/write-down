@@ -46,8 +46,7 @@ class FormStore {
         for (const [id, rules] of Object.entries(rulesById))
             this._fields[id] = new FormField(rules);
         
-        makeAutoObservable(this);
-        this.submit = this.submit.bind(this);
+        makeAutoObservable(this, {}, { autoBind: true });
     }
 
     public get fields(): Record<string, FormField> { return this._fields; }
