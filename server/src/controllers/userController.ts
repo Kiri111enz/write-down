@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import { User } from 'db/models';
 import { sendWithCookie, Cookie } from 'utils/response';
 
-const signUp = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+export const signUp = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
     try {
         const { name, email, password } = req.body;
         if (!password)
@@ -22,7 +22,7 @@ const signUp = async (req: Request, res: Response, next: NextFunction): Promise<
     }
 }
 
-const signIn = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+export const signIn = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
     try {
         const { name, email, password } = req.body;
         const user = 
@@ -43,11 +43,11 @@ const signIn = async (req: Request, res: Response, next: NextFunction): Promise<
     }
 }
 
-const signOut = async (req: Request, res: Response): Promise<Response> => {
+export const signOut = async (req: Request, res: Response): Promise<Response> => {
     return res.clearCookie('access_token').send('Successfully signed out.');
 }
 
-const updateToken = async (req: Request, res: Response): Promise<Response> => {
+export const updateToken = async (req: Request, res: Response): Promise<Response> => {
     const token = generateJWT(req.user);
     return sendWithCookie(res, new Cookie('access_token', token), 'Successfully authorized.');
 }
@@ -59,5 +59,3 @@ const generateJWT = (user: User): string => {
         { expiresIn: '24h' }
     )
 }
-
-export default { signUp, signIn, signOut, updateToken };

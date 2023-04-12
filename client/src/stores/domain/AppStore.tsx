@@ -1,6 +1,6 @@
 import AuthStore from './AuthStore';
 
-class AppStore {
+export default class AppStore {
     private readonly _authStore: AuthStore;
 
     constructor() {
@@ -9,5 +9,3 @@ class AppStore {
 
     public get authStore(): AuthStore { return this._authStore; }
 }
-
-export default AppStore;

@@ -1,7 +1,7 @@
 import { runInAction, makeAutoObservable } from 'mobx';
 import { Response } from 'utils/http';
 
-type Rule = (s: string) => string
+export type Rule = (s: string) => string
 
 class FormField {
     private _value = '';
@@ -36,7 +36,7 @@ class FormField {
     }; 
 }
 
-class FormStore {
+export default class FormStore {
     private _fields: Record<string, FormField> = { };
     private _alertText = '';
 
@@ -73,5 +73,3 @@ class FormStore {
         this._alertText = '';
     }
 }
-
-export { FormStore, FormField, Rule as FormFieldRule };

@@ -1,7 +1,7 @@
 import { runInAction, makeAutoObservable } from 'mobx';
 import { post, Response } from 'utils/http';
 
-class AuthStore {
+export default class AuthStore {
     private readonly _BASE_URL = 'user/';
     private _isAuthorized = false;
 
@@ -34,5 +34,3 @@ class AuthStore {
         return res;
     }
 }
-
-export default AuthStore;

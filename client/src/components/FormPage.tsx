@@ -2,7 +2,7 @@ import { PropsWithChildren, useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import { Alert, Snackbar } from '@mui/material';
 import { observer } from 'mobx-react-lite';
-import { FormStore } from 'stores/view/FormStore';
+import FormStore from 'stores/view/FormStore';
 import { AppStoreContext } from 'App';
 
 interface FormPageProps {

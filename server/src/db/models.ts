@@ -4,7 +4,7 @@ import { Model, Table, Column, DataType,
 const HASH_REGEX = /^\$2[ayb]\$.{56}$/;
 
 @Table
-class User extends Model {
+export class User extends Model {
     @Unique
     @AllowNull(false)
     @Length({ msg: 'Username length should be between 4 and 16.', min: 4, max: 16 })
@@ -43,5 +43,3 @@ class User extends Model {
     @Column(DataType.STRING(60))
     declare password: string;
 }
-
-export { User };

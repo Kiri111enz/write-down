@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { InputAdornment } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { observer, useLocalObservable } from 'mobx-react-lite';
-import { FormStore } from 'stores/view/FormStore';
+import FormStore from 'stores/view/FormStore';
 import { required } from 'utils/validator';
 import FormInput from 'components/FormInput';
 import Form from 'components/Form';

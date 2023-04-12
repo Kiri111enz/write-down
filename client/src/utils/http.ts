@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-class Response {
+export class Response {
     constructor(private _success: boolean, private _message: string) { }
 
     public get success(): boolean { return this._success; }
@@ -8,7 +8,7 @@ class Response {
     public get message(): string { return this._message; }
 }
 
-const post = async(url: string, data: object): Promise<Response> => {
+export const post = async(url: string, data: object): Promise<Response> => {
     try {
         const res = await axios.post(url, data, {
             headers: { 'Content-Type': 'application/json' },
@@ -22,5 +22,3 @@ const post = async(url: string, data: object): Promise<Response> => {
         return new Response(false, err);
     }
 };
-
-export { post, Response };
