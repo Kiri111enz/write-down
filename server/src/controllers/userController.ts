@@ -1,18 +1,17 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request as Req, Response as Res, NextFunction as Next } from 'express';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import { User } from 'db/models';
-import { sendWithCookie, Cookie } from 'utils/response';
+import { newAccessToken } from 'utils/token';
+import { withTokens, withAccessToken } from 'utils/response';
 
-export const signUp = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+export const signUp = async (req: Req, res: Res, next: Next): Promise<Res | void> => {
     try {
         const { name, email, password } = req.body;
         if (!password)
             return res.status(400).send('User password cannot be empty.');
         const passwordHash = await bcrypt.hash(password, 5);
         const user = await User.create({ name, email, password: passwordHash });
-        const token = generateJWT(user);
-        return sendWithCookie(res, new Cookie('access_token', token), 'Successfully signed up.');
+        return (await withTokens(res, user)).send('Successfully singed up.');
     }
     catch (err) {
         if (err.errors)
@@ -22,7 +21,7 @@ export const signUp = async (req: Request, res: Response, next: NextFunction): P
     }
 }
 
-export const signIn = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+export const signIn = async (req: Req, res: Res, next: Next): Promise<Res | void> => {
     try {
         const { name, email, password } = req.body;
         const user = 
@@ -35,27 +34,18 @@ export const signIn = async (req: Request, res: Response, next: NextFunction): P
         if (!bcrypt.compareSync(password, user.password))
             return res.status(400).send('Wrong password specified.');
         
-        const token = generateJWT(user);
-        return sendWithCookie(res, new Cookie('access_token', token), 'Successfully signed in.');
+        return (await withTokens(res, user)).send('Successfully signed in.');
     }
     catch (err) {
         return next(err);
     }
 }
 
-export const signOut = async (req: Request, res: Response): Promise<Response> => {
-    return res.clearCookie('access_token').send('Successfully signed out.');
+export const signOut = async (req: Req, res: Res): Promise<Res> => {
+    return res.clearCookie('access_token').clearCookie('refresh_token').send('Successfully signed out.');
 }
 
-export const updateToken = async (req: Request, res: Response): Promise<Response> => {
-    const token = generateJWT(req.user);
-    return sendWithCookie(res, new Cookie('access_token', token), 'Successfully authorized.');
-}
-
-const generateJWT = (user: User): string => {
-    return jwt.sign(
-        { id: user.id, name: user.name, email: user.email },
-        process.env.SECRET_KEY,
-        { expiresIn: '24h' }
-    )
+export const updateAccessToken = async (req: Req, res: Res): Promise<Res> => {
+    const token = newAccessToken(req.user);
+    return withAccessToken(res, req.user).send('Successfully authorized');
 }
