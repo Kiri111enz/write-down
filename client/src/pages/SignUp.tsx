@@ -2,13 +2,13 @@ import { useContext } from 'react';
 import { InputAdornment } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { observer, useLocalObservable } from 'mobx-react-lite';
+import { AppStoreContext } from 'App';
+import FormPage from '../components/FormPage';
+import Form from 'components/Form';
+import FormInput from 'components/FormInput';
 import FormStore from 'stores/view/FormStore';
 import { required, email, equals } from 'utils/validator';
-import FormInput from 'components/FormInput';
-import Form from 'components/Form';
-import FormPage from '../components/FormPage';
 import LinkWithDescription from 'components/LinkWithDescription';
-import { AppStoreContext } from 'App';
 
 const SignUp: React.FC<{ returnPath: string }> = observer(props => {
     const equals_password = (s: string): string => 

@@ -43,6 +43,6 @@ export class User extends Model {
     @Column(DataType.STRING(60))
     declare password: string;
 
-    @Column
+    @Column(DataType.STRING(137))
     declare refreshToken: string;
 }

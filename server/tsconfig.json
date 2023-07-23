@@ -4,8 +4,10 @@
     "module": "CommonJS",
     "esModuleInterop": true,
     "baseUrl": "src",
+    "strict": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
+    "useUnknownInCatchVariables": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "typeRoots": [

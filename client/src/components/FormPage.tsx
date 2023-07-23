@@ -6,7 +6,7 @@ import FormStore from 'stores/view/FormStore';
 import { AppStoreContext } from 'App';
 
 interface FormPageProps {
-    formStore: FormStore,
+    formStore: FormStore
     returnPath: string
 }
 

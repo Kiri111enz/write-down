@@ -1,8 +1,8 @@
 import { Link } from '@mui/material';
 
 interface LinkWithDescriptionProps {
-    description?: string,
-    href: string,
+    description?: string
+    href: string
     label: string
 }
 

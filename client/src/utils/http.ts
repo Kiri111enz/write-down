@@ -17,8 +17,6 @@ export const post = async(url: string, data: object): Promise<Response> => {
         return new Response(true, res.data);
     }
     catch (err) {
-        if (err.response)
-            return new Response(false, err.response.data);
-        return new Response(false, err);
+        return new Response(false, err.response ? err.response.data : err);
     }
 };

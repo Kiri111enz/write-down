@@ -5,7 +5,9 @@
     "module": "CommonJS",
     "esModuleInterop": true,
     "baseUrl": "src",
+    "strict": true,
     "noImplicitAny": true,
-    "noImplicitReturns": true
+    "noImplicitReturns": true,
+    "useUnknownInCatchVariables": false
   }
 }

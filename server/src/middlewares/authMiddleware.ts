@@ -15,15 +15,15 @@ const auth = async (req: Req, res: Res, next: Next): Promise<Res | void> => {
             return notAuthorized(res);
         let user;
         try {
-            user = jwt.verify(token, process.env.ACCESS_KEY) as User;
+            user = jwt.verify(token, process.env.ACCESS_KEY!) as User;
         }
         catch (err) {
             const token = req.cookies.refresh_token;
             if (!token)
                 return notAuthorized(res);
-            const decoded = jwt.verify(token, process.env.REFRESH_KEY) as User;
+            const decoded = jwt.verify(token, process.env.REFRESH_KEY!) as User;
             user = await User.findByPk(decoded.id);
-            if (token != (await User.findByPk(user.id)).refreshToken)
+            if (user === null || token != user.refreshToken)
                 return notAuthorized(res);
             await withRefreshToken(res, user);
         }

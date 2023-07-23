@@ -4,8 +4,8 @@ import { observer } from 'mobx-react-lite';
 import FormStore from 'stores/view/FormStore';
 
 interface FormProps {
-    title: string;
-    store: FormStore;
+    title: string
+    store: FormStore
 }
 
 const submit = async (event: React.FormEvent, onSubmit: (data: FormData) => Promise<void>): Promise<void> => {
@@ -15,7 +15,7 @@ const submit = async (event: React.FormEvent, onSubmit: (data: FormData) => Prom
     await onSubmit(data);
 };
 
-export const FormStoreContext = createContext<FormStore>(undefined);
+export const FormStoreContext = createContext<FormStore>({} as FormStore);
 
 const Form: React.FC<PropsWithChildren<FormProps>> = observer(props => (
     <Stack className="z-index-1 p-2 bg-white rounded text-center"

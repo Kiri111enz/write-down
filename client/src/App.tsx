@@ -7,7 +7,7 @@ import Main from 'pages/Main';
 import SignUp from 'pages/SignUp';
 import SignIn from 'pages/SignIn';
 
-export const AppStoreContext = createContext<AppStore>(undefined);
+export const AppStoreContext = createContext<AppStore>({} as AppStore);
 
 const App: React.FC = () => {
     const appStore = new AppStore();

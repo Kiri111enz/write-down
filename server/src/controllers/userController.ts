@@ -1,7 +1,6 @@
 import { Request as Req, Response as Res, NextFunction as Next } from 'express';
 import bcrypt from 'bcrypt';
 import { User } from 'db/models';
-import { newAccessToken } from 'utils/token';
 import { withTokens, withAccessToken } from 'utils/response';
 
 export const signUp = async (req: Req, res: Res, next: Next): Promise<Res | void> => {
@@ -46,6 +45,5 @@ export const signOut = async (req: Req, res: Res): Promise<Res> => {
 }
 
 export const updateAccessToken = async (req: Req, res: Res): Promise<Res> => {
-    const token = newAccessToken(req.user);
-    return withAccessToken(res, req.user).send('Successfully authorized');
+    return withAccessToken(res, req.user!).send('Successfully authorized');
 }
