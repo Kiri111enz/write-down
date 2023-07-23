@@ -4,13 +4,16 @@ import { post, Response } from 'utils/http';
 export default class AuthStore {
     private readonly BASE_URL = 'user/';
     private _isAuthorized = false;
+    private _isInitializing = true;
 
     constructor() {
         makeAutoObservable(this, {}, { autoBind: true });
-        this.auth();
+        this.auth().then(() => this._isInitializing = false);
     }
 
     public get isAuthorized(): boolean { return this._isAuthorized; }
+
+    public get isInitializing(): boolean { return this._isInitializing; }
 
     public async signIn(data: object): Promise<Response> {
         return await this._updateStatus('sign-in', data);
