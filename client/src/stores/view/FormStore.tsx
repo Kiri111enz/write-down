@@ -8,7 +8,7 @@ class FormField {
     private _isValid = false;
     private _errorMsg = '';
 
-    constructor(private _rules: Rule[]) {
+    constructor(private rules: Rule[]) {
         makeAutoObservable(this);
     }
 
@@ -23,9 +23,9 @@ class FormField {
         this._errorMsg = value;
     }
 
-    public update = (value: string): void => {
+    public update(value: string): void {
         this._value = value;
-        for (const rule of this._rules) {
+        for (const rule of this.rules) {
             const errorMsg = rule(value);
             if (errorMsg) {
                 this.errorMsg = errorMsg;
@@ -33,7 +33,7 @@ class FormField {
             }
         }
         this.errorMsg = '';
-    }; 
+    } 
 }
 
 export default class FormStore {
