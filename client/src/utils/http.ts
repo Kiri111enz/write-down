@@ -8,12 +8,10 @@ export class Response {
     public get message(): string { return this._message; }
 }
 
-export const post = async(url: string, data: object): Promise<Response> => {
+export const request = async (url: string, method: string, data: object={}, params: object={}): Promise<Response> => {
     try {
-        const res = await axios.post(url, data, {
-            headers: { 'Content-Type': 'application/json' },
-            withCredentials: true
-        });
+        const res = await axios.request({ url, method, data, params,
+            headers: { 'Content-Type': 'application/json' }, withCredentials: true });
         return new Response(true, res.data);
     }
     catch (err) {

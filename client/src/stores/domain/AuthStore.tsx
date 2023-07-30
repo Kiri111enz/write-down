@@ -1,5 +1,5 @@
 import { runInAction, makeAutoObservable } from 'mobx';
-import { post, Response } from 'utils/http';
+import { request, Response } from 'utils/http';
 
 export default class AuthStore {
     private readonly BASE_URL = 'user/';
@@ -8,7 +8,8 @@ export default class AuthStore {
 
     constructor() {
         makeAutoObservable(this, {}, { autoBind: true });
-        this.auth().then(() => this._isInitializing = false);
+        this.auth().then(() => 
+            runInAction(() => this._isInitializing = false));
     }
 
     public get isAuthorized(): boolean { return this._isAuthorized; }
@@ -32,7 +33,7 @@ export default class AuthStore {
     }
 
     private async _updateStatus(url: string, data: object, flip=false): Promise<Response> {
-        const res = await post(this.BASE_URL + url, data);
+        const res = await request(this.BASE_URL + url, 'post', data);
         runInAction(() => this._isAuthorized = flip ? !res.success : res.success);
         return res;
     }
