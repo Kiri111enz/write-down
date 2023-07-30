@@ -1,5 +1,5 @@
 import { Model, Table, Column, DataType, HasMany, ForeignKey,
-    Unique, AllowNull, Length, NotContains, Is, Validate } from 'sequelize-typescript';
+    Unique, AllowNull, Length, NotContains, Is, Validate, Default } from 'sequelize-typescript';
 
 const HASH_REGEX = /^\$2[ayb]\$.{56}$/;
 
@@ -52,12 +52,23 @@ export class User extends Model {
 
 @Table
 export class Note extends Model {
+    @Default('')
     @Column
     declare title: string;
     
+    @Default('')
     @Column
     declare text: string;
 
     @ForeignKey(() => User)
+    @AllowNull(false)
+    @Validate({
+        notNull: { msg: 'userId cannot be empty.' },
+    })
+    @Is('Valid', async (value: number) => {
+        if (!(await User.findByPk(value)))
+            throw new Error('userId must be valid.');
+    })
+    @Column
     declare userId: number;
 }
