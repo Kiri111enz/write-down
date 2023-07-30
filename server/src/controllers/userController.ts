@@ -42,5 +42,5 @@ export const signOut = async (req: Req, res: Res): Promise<Res> => {
 }
 
 export const updateAccessToken = async (req: Req, res: Res): Promise<Res> => {
-    return withAccessToken(res, req.user!).send('Successfully authorized');
+    return withAccessToken(res, req.user!).send('Successfully authorized.');
 }

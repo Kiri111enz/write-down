@@ -1,18 +1,15 @@
 import { Request as Req, Response as Res, NextFunction as Next } from 'express';
-import { Note, User } from 'db/models';
+import { Note } from 'db/models';
 
 export const get = async (req: Req, res: Res): Promise<Res> => {
-    const { userId } = req.query;
-    if (!(await User.findByPk(userId as string)))
-        return res.status(400).send('Invalid userId.');
-    const notes = await Note.findAll({ where: { userId }});
+    const notes = await Note.findAll({ where: { userId: req.user!.id }});
     return res.json(notes);
 }
 
 export const create = async (req: Req, res: Res, next: Next): Promise<Res | void> => {
     try {
-        const { userId, title, text } = req.body;
-        const note = await Note.create({ userId, title, text });
+        const { title, text } = req.body;
+        const note = await Note.create({ userId: req.user!.id, title, text });
         return res.json(note);
     }
     catch (err) {
@@ -28,6 +25,8 @@ export const change = async (req: Req, res: Res): Promise<Res> => {
     const note = await Note.findByPk(noteId as string);
     if (!note)
         return res.status(400).send('Invalid noteId.');
+    if (note.userId !== req.user!.id)
+        return res.status(400).send('Permission denied.');
     note.update({ title, text });
     return res.json(note);
 } 
@@ -37,6 +36,8 @@ export const destroy = async (req: Req, res: Res): Promise<Res> => {
     const note = await Note.findByPk(noteId as string);
     if (!note)
         return res.status(400).send('Invalid noteId.');
+    if (note.userId !== req.user!.id)
+        return res.status(400).send('Permission denied.');
     note.destroy();
     return res.send(`Successfully deleted note ${noteId}.`);
 }
