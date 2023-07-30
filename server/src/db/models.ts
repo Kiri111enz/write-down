@@ -1,4 +1,4 @@
-import { Model, Table, Column, DataType,
+import { Model, Table, Column, DataType, HasMany, ForeignKey,
     Unique, AllowNull, Length, NotContains, Is, Validate } from 'sequelize-typescript';
 
 const HASH_REGEX = /^\$2[ayb]\$.{56}$/;
@@ -45,4 +45,19 @@ export class User extends Model {
 
     @Column(DataType.STRING(137))
     declare refreshToken: string;
+
+    @HasMany(() => Note)
+    declare notes: Note[];
+}
+
+@Table
+export class Note extends Model {
+    @Column
+    declare title: string;
+    
+    @Column
+    declare text: string;
+
+    @ForeignKey(() => User)
+    declare userId: number;
 }
