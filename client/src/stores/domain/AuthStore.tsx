@@ -16,24 +16,24 @@ export default class AuthStore {
 
     public get isInitializing(): boolean { return this._isInitializing; }
 
-    public async signIn(data: object): Promise<Response> {
+    public async signIn(data: object): Promise<Response<string>> {
         return await this._updateStatus('sign-in', data);
     }
 
-    public async signUp(data: object): Promise<Response> {
+    public async signUp(data: object): Promise<Response<string>> {
         return await this._updateStatus('sign-up', data);
     }
 
-    public async auth(): Promise<Response> {
+    public async auth(): Promise<Response<string>> {
         return await this._updateStatus('auth', {});
     }
 
-    public async signOut(): Promise<Response> {
+    public async signOut(): Promise<Response<string>> {
         return await this._updateStatus('sign-out', {}, true);
     }
 
-    private async _updateStatus(url: string, data: object, flip=false): Promise<Response> {
-        const res = await request(this.BASE_URL + url, 'post', data);
+    private async _updateStatus(url: string, data: object, flip=false): Promise<Response<string>> {
+        const res = await request<string>(this.BASE_URL + url, 'post', data);
         runInAction(() => this._isAuthorized = flip ? !res.success : res.success);
         return res;
     }

@@ -7,7 +7,7 @@ export default class AppStore {
 
     constructor() {
         this._authStore = new AuthStore();
-        this._notesStore = new NotesStore();
+        this._notesStore = new NotesStore(this);
     }
 
     public get authStore(): AuthStore { return this._authStore; }
