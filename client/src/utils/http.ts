@@ -1,11 +1,9 @@
 import axios from 'axios';
 
 export class Response<Type> {
-    constructor(private _success: boolean, private _message: Type) { }
-
-    public get success(): boolean { return this._success; }
-
-    public get message(): Type { return this._message; }
+    constructor(
+        public readonly success: boolean, 
+        public readonly message: Type) { }
 }
 
 export const request = async <Type>(url: string, method: string, data: object={}, params: object={}): Promise<Response<Type>> => {
