@@ -21,7 +21,8 @@ export default class NotesStore {
             return this._notes = null;
 
         if (this._notes === null)
-            request<Note[]>(this.BASE_URL + 'get', 'get').then((res) => runInAction(() => this._notes = res.message));
+            request<Note[]>(this.BASE_URL + 'get', 'get').then((res) => 
+                runInAction(() => this._notes = res.message.sort((note1, note2) => note1.id - note2.id)));
         return this._notes;
     }
 
@@ -33,11 +34,20 @@ export default class NotesStore {
             .then((res) => runInAction(() => this._notes!.push(res.message)));
     }
 
+    public async updateNote(updatedNote: Note): Promise<void> {
+        console.log('hui');
+        const index = this._notes?.findIndex((note) => note.id === updatedNote.id);
+        if (index === undefined)
+            throw new Error('Tried to update an unexisting note.');
+        this._notes![index] = updatedNote;
+        await request(this.BASE_URL + 'change', 'post', updatedNote);
+    }
+
     public async deleteNote(noteId: number): Promise<void> {
         const index = this._notes?.findIndex((note) => note.id === noteId);
         if (index === undefined)
             throw new Error('Tried to delete an unexisting note.');
         this._notes!.splice(index, 1);
-        void request(this.BASE_URL + 'delete', 'delete', {}, { noteId });
+        await request(this.BASE_URL + 'delete', 'delete', {}, { noteId });
     }
 }

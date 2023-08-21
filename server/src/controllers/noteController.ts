@@ -21,8 +21,8 @@ export const create = async (req: Req, res: Res, next: Next): Promise<Res | void
 };
 
 export const change = async (req: Req, res: Res): Promise<Res> => {
-    const { noteId, title, text } = req.body;
-    const note = await Note.findByPk(noteId as string);
+    const { id, title, text } = req.body;
+    const note = await Note.findByPk(id as string);
     if (!note)
         return res.status(400).send('Invalid noteId.');
     if (note.userId !== req.user!.id)
