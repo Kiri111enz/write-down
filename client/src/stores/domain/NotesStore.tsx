@@ -2,7 +2,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import AppStore from './AppStore';
 import { request } from 'utils/http';
 
-interface Note {
+export interface Note {
     id: number
     title: string
     text: string

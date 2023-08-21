@@ -22,7 +22,7 @@
         "quotes":          [ "warn", "single" ],
         "semi":            [ "warn", "always" ],
         "no-unused-vars":  [ "warn", { "args": "none" }],
-        "flatTernaryExpressions": true,
+        "flatTernaryExpressions": 0,
 
         "@typescript-eslint/ban-ts-comment": "off",
         "@typescript-eslint/explicit-function-return-type": [ "error", { "allowExpressions": true } ]

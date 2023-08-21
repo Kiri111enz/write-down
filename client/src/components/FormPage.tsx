@@ -1,9 +1,9 @@
-import { PropsWithChildren, useContext } from 'react';
+import React, { PropsWithChildren, useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import { Alert, Snackbar } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import FormStore from 'stores/view/FormStore';
-import { AppStoreContext } from 'App';
+import { AppContext } from 'App';
 
 interface FormPageProps {
     formStore: FormStore
@@ -11,7 +11,7 @@ interface FormPageProps {
 }
 
 const FormPage: React.FC<PropsWithChildren<FormPageProps>> = observer(props => {
-    const authStore = useContext(AppStoreContext).authStore;
+    const { authStore } = useContext(AppContext);
 
     const hideSnackbar = (): void => {
         props.formStore.resetAlertText();

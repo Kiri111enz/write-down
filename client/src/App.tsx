@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { createContext } from 'react';
+import React, { createContext } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import AppStore from 'stores/domain/AppStore';
 import RequireAuth from 'components/RequireAuth';
@@ -7,7 +7,7 @@ import Main from 'pages/Main';
 import SignUp from 'pages/SignUp';
 import SignIn from 'pages/SignIn';
 
-export const AppStoreContext = createContext<AppStore>({} as AppStore);
+export const AppContext = createContext<AppStore>({} as AppStore);
 
 const App: React.FC = () => {
     const appStore = new AppStore();
@@ -19,9 +19,9 @@ const App: React.FC = () => {
     ]);
     
     return (
-        <AppStoreContext.Provider value={appStore}>
+        <AppContext.Provider value={appStore}>
             <RouterProvider router={router} />
-        </AppStoreContext.Provider>
+        </AppContext.Provider>
     );
 };
 

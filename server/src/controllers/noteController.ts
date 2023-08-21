@@ -4,7 +4,7 @@ import { Note } from 'db/models';
 export const get = async (req: Req, res: Res): Promise<Res> => {
     const notes = await Note.findAll({ where: { userId: req.user!.id }});
     return res.json(notes);
-}
+};
 
 export const create = async (req: Req, res: Res, next: Next): Promise<Res | void> => {
     try {
@@ -18,7 +18,7 @@ export const create = async (req: Req, res: Res, next: Next): Promise<Res | void
         else
             return next(err);
     }
-}
+};
 
 export const change = async (req: Req, res: Res): Promise<Res> => {
     const { noteId, title, text } = req.body;
@@ -27,9 +27,9 @@ export const change = async (req: Req, res: Res): Promise<Res> => {
         return res.status(400).send('Invalid noteId.');
     if (note.userId !== req.user!.id)
         return res.status(400).send('Permission denied.');
-    note.update({ title, text });
+    await note.update({ title, text });
     return res.json(note);
-} 
+}; 
 
 export const destroy = async (req: Req, res: Res): Promise<Res> => {
     const { noteId } = req.query;
@@ -38,6 +38,6 @@ export const destroy = async (req: Req, res: Res): Promise<Res> => {
         return res.status(400).send('Invalid noteId.');
     if (note.userId !== req.user!.id)
         return res.status(400).send('Permission denied.');
-    note.destroy();
+    await note.destroy();
     return res.send(`Successfully deleted note ${noteId}.`);
-}
+};

@@ -1,4 +1,4 @@
-import { useContext, ChangeEvent } from 'react';
+import React, { useContext } from 'react';
 import { observer } from 'mobx-react-lite';
 import { TextField, TextFieldProps } from '@mui/material';
 import { FormStoreContext } from './Form';
@@ -13,9 +13,7 @@ const FormInput: React.FC<FormInputProps> = observer(props => {
             size={props.size ? props.size : 'small'} // @ts-ignore
             error={!!formStore.fields[props.id].errorMsg} // @ts-ignore
             helperText={formStore.fields[props.id].errorMsg}
-            onChange={((event: ChangeEvent<HTMLInputElement>) => {
-                formStore.onFieldChange(event.currentTarget.id, event.currentTarget.value);
-            })}>
+            onChange={((event) => formStore.onFieldChange(event.currentTarget.id, event.currentTarget.value))}>
         </TextField>
     );
 });

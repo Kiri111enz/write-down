@@ -1,17 +1,20 @@
-import { useContext } from 'react';
-import { Paper } from '@mui/material';
-import { observer, useLocalObservable } from 'mobx-react-lite';
-import { AppStoreContext } from 'App';
-import NotesStore from 'stores/domain/NotesStore';
+import React, { useContext } from 'react';
+import { observer } from 'mobx-react-lite';
+import { Grid } from '@mui/material';
+import { AppContext } from 'App';
+import NoteCard from 'components/NoteCard';
 
 const Main: React.FC = observer(() => {
-    const appStore = useContext(AppStoreContext);
-    const notesStore = useLocalObservable<NotesStore>(() => appStore.notesStore);
+    const { notesStore } = useContext(AppContext);
 
     return (
-        <div className="vw-100">
-            {notesStore.notes?.map(note => <Paper key={note.id} elevation={2}>{note.text}</Paper>)}
-        </div>
+        <Grid container spacing={3}>
+            {notesStore.notes?.map(note => (
+                <Grid item key={note.id}>
+                    <NoteCard key={note.id} note={note} />
+                </Grid>
+            ))}
+        </Grid>
     );
 });
 

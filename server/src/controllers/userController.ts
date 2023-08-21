@@ -18,7 +18,7 @@ export const signUp = async (req: Req, res: Res, next: Next): Promise<Res | void
         else
             return next(err);
     }
-}
+};
 
 export const signIn = async (req: Req, res: Res): Promise<Res> => {
     const { name, email, password } = req.body;
@@ -27,20 +27,20 @@ export const signIn = async (req: Req, res: Res): Promise<Res> => {
 
     const user = 
         name ? await User.findOne({ where: { name }}) :
-        email ? await User.findOne({ where: { email }}) :
-        undefined;
+            email ? await User.findOne({ where: { email }}) :
+                undefined;
     if (!user)
         return res.status(400).send('Wrong username/email specified.');
     if (!bcrypt.compareSync(password, user.password))
         return res.status(400).send('Wrong password specified.');
     
     return (await withTokens(res, user)).send('Successfully signed in.');
-}
+};
 
 export const signOut = async (req: Req, res: Res): Promise<Res> => {
     return res.clearCookie('access_token').clearCookie('refresh_token').send('Successfully signed out.');
-}
+};
 
 export const updateAccessToken = async (req: Req, res: Res): Promise<Res> => {
     return withAccessToken(res, req.user!).send('Successfully authorized.');
-}
+};

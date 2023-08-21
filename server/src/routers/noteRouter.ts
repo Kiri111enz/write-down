@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router } from 'express';
 import * as note from 'controllers/noteController';
 import auth from 'middlewares/authMiddleware';
 

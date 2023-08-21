@@ -8,8 +8,7 @@ export default class AuthStore {
 
     constructor() {
         makeAutoObservable(this, {}, { autoBind: true });
-        this.auth().then(() => 
-            runInAction(() => this._isInitializing = false));
+        this.auth().then(() => runInAction(() => this._isInitializing = false));
     }
 
     public get isAuthorized(): boolean { return this._isAuthorized; }

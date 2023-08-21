@@ -2,15 +2,11 @@ import AuthStore from './AuthStore';
 import NotesStore from './NotesStore';
 
 export default class AppStore {
-    private readonly _authStore: AuthStore;
-    private readonly _notesStore: NotesStore;
+    public readonly authStore: AuthStore;
+    public readonly notesStore: NotesStore;
 
     constructor() {
-        this._authStore = new AuthStore();
-        this._notesStore = new NotesStore(this);
+        this.authStore = new AuthStore();
+        this.notesStore = new NotesStore(this);
     }
-
-    public get authStore(): AuthStore { return this._authStore; }
-
-    public get notesStore(): NotesStore { return this._notesStore; }
 }
