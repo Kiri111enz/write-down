@@ -7,7 +7,7 @@ const Header: React.FC = () => {
     const { authStore, notesStore } = useContext(AppContext);
 
     return (
-        <AppBar position="static" className="d-flex flex-row">
+        <AppBar position="sticky" className="d-flex flex-row">
             <IconButton onClick={notesStore.addNote}>
                 <Add />
             </IconButton>
