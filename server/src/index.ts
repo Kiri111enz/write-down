@@ -31,4 +31,4 @@ const launchServer = async(): Promise<void> => {
     }
 };
 
-launchServer();
+void launchServer();

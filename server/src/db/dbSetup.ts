@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize-typescript';
-import { User } from './models';
+import { User, Note } from './models';
 
 export default new Sequelize(
     process.env.DB_NAME!,
@@ -9,6 +9,6 @@ export default new Sequelize(
         dialect: 'postgres',
         host: process.env.DB_HOST,
         port: parseInt(process.env.DB_PORT!),
-        models: [ User ]
+        models: [ User, Note ]
     }
 ); 

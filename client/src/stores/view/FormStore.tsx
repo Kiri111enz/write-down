@@ -42,7 +42,7 @@ export default class FormStore {
 
     constructor(
         rulesById: Record<string, Rule[]>,
-        private _submitFunc: (data: object) => Promise<Response>) {
+        private _submitFunc: (data: object) => Promise<Response<string>>) {
         for (const [id, rules] of Object.entries(rulesById))
             this._fields[id] = new FormField(rules);
         

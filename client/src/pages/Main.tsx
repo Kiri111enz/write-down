@@ -1,20 +1,25 @@
-import { useContext } from 'react';
-import { Button } from '@mui/material';
-import { AppStoreContext } from 'App';
+import React, { useContext } from 'react';
+import { observer } from 'mobx-react-lite';
+import { Grid } from '@mui/material';
+import { AppContext } from 'App';
+import Header from 'components/Header';
+import NoteCard from 'components/NoteCard';
 
-const Main: React.FC = () => {
-    const userStore = useContext(AppStoreContext).authStore;
-
-    const logOut = async (): Promise<void> => {
-        await userStore.signOut();  
-    };
+const Main: React.FC = observer(() => {
+    const { notesStore } = useContext(AppContext);
 
     return (
         <>
-            <h1>Write Down is here!</h1>
-            <Button variant="contained" onClick={logOut}>Sign Out</Button>
+            <Header />
+            <Grid container sx={{ m: 0, p: 2 }} className="w-100">
+                {notesStore.notes?.map((note) => (
+                    <Grid sx={{ m: 2 }} className="w-100" item key={note.id}>
+                        <NoteCard key={note.id} note={note} />
+                    </Grid>
+                ))}
+            </Grid>
         </>
     );
-};
+});
 
 export default Main;

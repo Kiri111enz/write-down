@@ -1,5 +1,5 @@
 import { runInAction, makeAutoObservable } from 'mobx';
-import { post, Response } from 'utils/http';
+import { request, Response } from 'utils/http';
 
 export default class AuthStore {
     private readonly BASE_URL = 'user/';
@@ -8,31 +8,31 @@ export default class AuthStore {
 
     constructor() {
         makeAutoObservable(this, {}, { autoBind: true });
-        this.auth().then(() => this._isInitializing = false);
+        this.auth().then(() => runInAction(() => this._isInitializing = false));
     }
 
     public get isAuthorized(): boolean { return this._isAuthorized; }
 
     public get isInitializing(): boolean { return this._isInitializing; }
 
-    public async signIn(data: object): Promise<Response> {
+    public async signIn(data: object): Promise<Response<string>> {
         return await this._updateStatus('sign-in', data);
     }
 
-    public async signUp(data: object): Promise<Response> {
+    public async signUp(data: object): Promise<Response<string>> {
         return await this._updateStatus('sign-up', data);
     }
 
-    public async auth(): Promise<Response> {
+    public async auth(): Promise<Response<string>> {
         return await this._updateStatus('auth', {});
     }
 
-    public async signOut(): Promise<Response> {
+    public async signOut(): Promise<Response<string>> {
         return await this._updateStatus('sign-out', {}, true);
     }
 
-    private async _updateStatus(url: string, data: object, flip=false): Promise<Response> {
-        const res = await post(this.BASE_URL + url, data);
+    private async _updateStatus(url: string, data: object, flip=false): Promise<Response<string>> {
+        const res = await request<string>(this.BASE_URL + url, 'post', data);
         runInAction(() => this._isAuthorized = flip ? !res.success : res.success);
         return res;
     }
