@@ -21,7 +21,15 @@ export default class NotesStore {
             return this._notes = null;
         
         if (this._notes === null)
-            request<Note[]>(this.BASE_URL + 'get', 'get').then(res => runInAction(() => this._notes = res.message));
+            request<Note[]>(this.BASE_URL + 'get', 'get').then((res) => runInAction(() => this._notes = res.message));
         return this._notes;
+    }
+
+    public async addNote(): Promise<void> {
+        if (this._notes === null)
+            throw new Error('Tried to add a note without authentication.');
+
+        request<Note>(this.BASE_URL + 'create', 'post', { title: '', text: '' })
+            .then((res) => runInAction(() => this._notes!.push(res.message)));
     }
 }

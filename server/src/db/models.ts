@@ -53,11 +53,11 @@ export class User extends Model {
 @Table
 export class Note extends Model {
     @Default('')
-    @Column
+    @Column(DataType.TEXT)
     declare title: string;
     
     @Default('')
-    @Column
+    @Column(DataType.TEXT)
     declare text: string;
 
     @ForeignKey(() => User)
