@@ -2,3 +2,4 @@ node_modules/
 public/
 .parcel-cache/
 .env
+test.http
